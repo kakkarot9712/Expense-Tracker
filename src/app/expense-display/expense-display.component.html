@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="year" class="form-label"><strong>Sort By Year</strong></label>
+    <select name="selectedyear" id="year" class="form-select" [(ngModel)]='selectedYear'>
+        <option *ngFor="let year of YEARS" value='{{year}}'>{{ year }}</option>
+    </select>
+</div>
+<app-info-card></app-info-card>
+<app-info-card></app-info-card>
+<app-info-card></app-info-card>

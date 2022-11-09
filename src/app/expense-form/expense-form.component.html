@@ -1,0 +1,19 @@
+<button class="addExpense__cta" (click)="addExpensewizardHandler()" *ngIf="!formActivated">
+    Add New Expense
+</button>
+<form (ngSubmit)="onSubmitHandler(expenseForm)" #expenseForm='ngForm' *ngIf="formActivated">
+    <div class="form-group">
+        <label for="expenseName" class="form-label"><strong>Expense Name</strong></label>
+        <input type="text" class="form-input" id="expenseName" name="expenseName" ngModel required>
+    </div>
+    <div class="form-group">
+        <label for="expenseAmount" class="form-label"><strong>Expense Amount</strong></label>
+        <input type="number" class="form-input" id="expenseAmount" name="expenseAmount" ngModel required>
+    </div>
+    <div class="form-group">
+        <label for="expenseAmount" class="form-label"><strong>Expense Amount</strong></label>
+        <input type="date" class="form-input" id="expenseDate" name="expenseDate" ngModel required>
+    </div>
+    <button class="addExpense__cta" type="submit">Add Expense</button>
+    <button class="addExpense__cta addExpense__cancel" (click)="cancelForm()" type="button">Cancel</button>
+</form>

@@ -1,0 +1,30 @@
+.info-card {
+    background-color: #770877;
+    display: flex;
+    color: white;
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.info-card__date {
+    background-color: hsl(300, 79%, 15%);
+    padding: 0.2rem 0.8rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-card__date-year {
+    font-size: small;
+}
+
+.info-card__date-month,
+.info-card__name,
+.info-card__amount {
+    font-size: 1.3rem;
+}
