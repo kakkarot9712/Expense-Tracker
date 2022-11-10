@@ -7,10 +7,17 @@
     align-items: center;
     padding: 1rem;
     margin: 1rem;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+    box-shadow: 2px 2px 2px 2px rgba(32, 1, 34, 0.8);
+}
+
+.info-card:hover {
+    transform: scale(1.04);
 }
 
 .info-card__date {
     background-color: hsl(300, 79%, 15%);
+    border: 2px solid hsl(300, 100%, 3%);
     padding: 0.2rem 0.8rem;
     border-radius: 10px;
     display: flex;
