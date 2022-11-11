@@ -1,9 +1,9 @@
 <div class="info-card">
     <div class="info-card__date">
-        <p class="info-card__date-year">2022</p>
-        <h1 class="info-card__date-day">25</h1>
-        <p class="info-card__Date-month">June</p>
+        <p class="info-card__date-year">{{ expense.expenseDate['year'] }}</p>
+        <h1 class="info-card__date-day">{{ expense.expenseDate['day'] }}</h1>
+        <p class="info-card__Date-month">{{ expense.expenseDate['month'] }}</p>
     </div>
-    <p class="info-card__name">Smartphone</p>
-    <p class="info-card__amount">&#x20b9; 20,000</p>
+    <p class="info-card__name">{{ expense.expenseName }}</p>
+    <p class="info-card__amount">&#x20b9; {{ expense.expenseAmount }}</p>
 </div>

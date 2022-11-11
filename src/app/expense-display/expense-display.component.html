@@ -1,9 +1,8 @@
 <div class="form-group">
     <label for="year" class="form-label"><strong>Sort By Year</strong></label>
-    <select name="selectedyear" id="year" class="form-select" [(ngModel)]='selectedYear'>
-        <option *ngFor="let year of YEARS" value='{{year}}'>{{ year }}</option>
+    <select name="selectedyear" id="year" class="form-select" (change)="filterExpenses()" [(ngModel)]='selectedYear'>
+        <option *ngFor="let year of YEARS" [value]='year'>{{ year }}</option>
     </select>
 </div>
-<app-info-card></app-info-card>
-<app-info-card></app-info-card>
-<app-info-card></app-info-card>
+<h3 *ngIf="FilteredExpenses.length===0">Nothing to show for year {{ selectedYear }}! change year or add expense to get started!</h3>
+<app-info-card *ngFor="let expense of FilteredExpenses" [expenseData]="expense"></app-info-card>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms'
+import { ExpenseModel } from '../shared/expense.model';
+import { ExpenseService } from '../shared/expense.service';
 
 @Component({
   standalone: true,
@@ -11,7 +13,7 @@ import { NgForm, FormsModule } from '@angular/forms'
 })
 export class ExpenseFormComponent implements OnInit {
   formActivated = false
-  constructor() { }
+  constructor(private expenseservice: ExpenseService) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +23,18 @@ export class ExpenseFormComponent implements OnInit {
   }
 
   onSubmitHandler(form: NgForm){
-    console.log(form)
+    let currentdate = new Date(form.value.expenseDate)
+    let newExpense: ExpenseModel = {
+      expenseName: form.value.expenseName,
+      expenseAmount: form.value.expenseAmount,
+      expenseDate: {
+        day: currentdate.getDate().toString(),
+        month: currentdate.toLocaleString('default', {month: 'short'}),
+        year: currentdate.toLocaleString('default', {year: 'numeric'})
+      }
+    }
+    this.expenseservice.addExpense(newExpense)
+    form.reset()
   }
 
   cancelForm(){
