@@ -21,22 +21,21 @@ export class ExpenseDisplayComponent implements OnInit, OnDestroy{
 
   constructor(private expenservice: ExpenseService) { 
     this.selectedYear = '2022'
-    this.filterExpenses()
+    this.FilteredExpenses = this.expenservice.getFilteredExpenses(this.selectedYear)
+  }
+
+  filterExpenses(){
+    this.expenservice.currentYear.next(this.selectedYear)
+    this.FilteredExpenses = this.expenservice.getFilteredExpenses(this.selectedYear)
   }
 
   ngOnInit(): void {
     this.expenseChangeObs = this.expenservice.expenseChanged.subscribe(response => {
-      this.filterExpenses()
+      this.FilteredExpenses = this.expenservice.getFilteredExpenses(this.selectedYear)
     })
-  }
-
-  filterExpenses(){
-    this.FilteredExpenses = this.expenservice.getExpenses().filter((expense: ExpenseModel)=>expense.expenseDate.year === this.selectedYear)
-    console.log(this.FilteredExpenses)
   }
 
   ngOnDestroy(): void {
     this.expenseChangeObs.unsubscribe()
   }
-
 }

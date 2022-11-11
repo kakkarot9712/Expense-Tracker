@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, BehaviorSubject } from "rxjs";
 import { ExpenseModel } from "./expense.model";
 
 @Injectable({providedIn: "root"})
@@ -45,10 +45,11 @@ export class ExpenseService {
     
     constructor(){}
 
-    expenseChanged = new Subject<boolean>()
+    expenseChanged = new BehaviorSubject<boolean>(true)
+    currentYear = new BehaviorSubject<string>('2022')
 
-    getExpenses(){
-        return this.DUMMY_EXPENSES.slice()
+    getFilteredExpenses(year: string){
+        return this.DUMMY_EXPENSES.filter((expense: ExpenseModel)=>expense.expenseDate.year === year)
     }
 
     addExpense(newExpense: ExpenseModel){

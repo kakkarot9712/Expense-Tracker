@@ -1,0 +1,8 @@
+<div class="graph-container">
+    <div class="bar-container" *ngFor="let month of MONTH_RATIOS | keyvalue">
+        <div class="unfilled-bar">
+            <div class="filled-bar" [fillGraph]="month.value"></div>
+        </div>
+        <p> {{ month.key }} </p>
+    </div>
+</div>
