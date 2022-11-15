@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { transition, animate, style, trigger, state } from '@angular/animations';
+
 import { GraphFiller } from './graph-filler.directive';
 import { ExpenseService } from '../shared/expense.service';
 import { ExpenseModel } from '../shared/expense.model';
 import { Subscription } from 'rxjs';
-import { transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-expense-graph',
@@ -12,10 +13,16 @@ import { transition, animate, style } from '@angular/animations';
   imports: [CommonModule, GraphFiller],
   templateUrl: './expense-graph.component.html',
   styleUrls: ['./expense-graph.component.css'],
-  // animations:[
-  //   transition('open <=> closed', animate('1s ease-out', style({height:0})))
-  // ]
+  animations: [trigger('heightAnim', [
+    transition(':enter', [
+      style({
+        height:0
+      }),
+      animate(500)
+    ])
+  ])]
 })
+
 export class ExpenseGraphComponent implements OnInit {
   maxAmount: number
   expenseObs: Subscription

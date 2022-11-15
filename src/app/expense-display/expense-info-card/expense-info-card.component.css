@@ -1,18 +1,29 @@
 .info-card {
     background-color: #770877;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     color: white;
     border-radius: 10px;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 1rem;
     margin: 1rem;
+    -webkit-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+    -o-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
     transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
-    box-shadow: 2px 2px 2px 2px rgba(32, 1, 34, 0.8);
+    -webkit-box-shadow: 2px 2px 2px 2px rgba(32, 1, 34, 0.8);
+            box-shadow: 2px 2px 2px 2px rgba(32, 1, 34, 0.8);
 }
 
 .info-card:hover {
-    transform: scale(1.04);
+    -webkit-transform: scale(1.04);
+        -ms-transform: scale(1.04);
+            transform: scale(1.04);
 }
 
 .info-card__date {
@@ -20,11 +31,20 @@
     border: 2px solid hsl(300, 100%, 3%);
     padding: 0.2rem 0.8rem;
     border-radius: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 4.5rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .info-card__date-year {

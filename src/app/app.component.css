@@ -10,5 +10,7 @@
     border-radius: 10px;
     padding: 1.5rem;
     text-align: center;
+    -webkit-transition: all 1s;
+    -o-transition: all 1s;
     transition: all 1s; 
 }
