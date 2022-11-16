@@ -12,10 +12,29 @@ import { ExpenseService } from '../shared/expense.service';
   styleUrls: ['./expense-form.component.css']
 })
 export class ExpenseFormComponent implements OnInit {
+  
   formActivated = false
+  editMode = false
+  editIndex = -1
+
+  expenseName: string
+  expenseAmount: string
+  expenseDate: string
+
   constructor(private expenseservice: ExpenseService) { }
 
   ngOnInit(): void {
+    this.expenseservice.editExpenseIndex.subscribe((index)=>{
+      this.formActivated = true
+      this.editMode = true
+      this.editIndex = index
+      let expenseTOLoad: ExpenseModel = this.expenseservice.getExpense(index)
+      this.expenseName = expenseTOLoad.expenseName
+      this.expenseAmount = expenseTOLoad.expenseAmount
+
+      let dateToLoad = new Date(`${expenseTOLoad.expenseDate.month} ${expenseTOLoad.expenseDate.day} ${expenseTOLoad.expenseDate.year}`)
+      this.expenseDate = `${dateToLoad.getFullYear()}-${dateToLoad.toLocaleString('default', {month: '2-digit'})}-${dateToLoad.toLocaleString('default', {day:'2-digit'})}`
+    })
   }
 
   addExpensewizardHandler(){
@@ -24,17 +43,26 @@ export class ExpenseFormComponent implements OnInit {
 
   onSubmitHandler(form: NgForm){
     let currentdate = new Date(form.value.expenseDate)
-    let newExpense: ExpenseModel = {
-      expenseName: form.value.expenseName,
-      expenseAmount: form.value.expenseAmount,
-      expenseDate: {
-        day: currentdate.getDate().toString(),
-        month: currentdate.toLocaleString('default', {month: 'short'}),
-        year: currentdate.toLocaleString('default', {year: 'numeric'})
+      let newExpense: ExpenseModel = {
+        expenseName: form.value.expenseName,
+        expenseAmount: form.value.expenseAmount,
+        expenseDate: {
+          day: currentdate.getDate().toString(),
+          month: currentdate.toLocaleString('default', {month: 'short'}),
+          year: currentdate.toLocaleString('default', {year: 'numeric'})
+        }
       }
+
+    if(!this.editMode){
+      this.expenseservice.addExpense(newExpense)
     }
-    this.expenseservice.addExpense(newExpense)
+    else{
+      this.expenseservice.replaceExpense(this.editIndex, newExpense)
+    }
     form.reset()
+    this.formActivated = false
+    this.editMode = false
+    this.editIndex = -1
   }
 
   cancelForm(){

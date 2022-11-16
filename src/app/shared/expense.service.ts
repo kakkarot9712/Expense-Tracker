@@ -12,19 +12,42 @@ export class ExpenseService {
 
     expenseChanged = new BehaviorSubject<boolean>(true)
     currentYear = new BehaviorSubject<string>('2022')
+    editExpenseIndex = new Subject<number>()
 
     getFilteredExpenses(year: string){
         return this.expenses.filter((expense: ExpenseModel)=>expense.expenseDate.year === year)
+    }
+
+    getExpense(index: number){
+        return this.expenses[index]
     }
 
     getMonths(){
         return this.months_list.slice()
     }
 
-    addExpense(newExpense: ExpenseModel){
-        this.expenses.push(newExpense)
+    applyChanges(){
         this.expenseChanged.next(true)
         localStorage.setItem('expenses', JSON.stringify(this.expenses))
+    }
+
+    addExpense(newExpense: ExpenseModel){
+        this.expenses.push(newExpense)
+        this.applyChanges()
+    }
+
+    editExpense(index: number){
+        this.editExpenseIndex.next(index)
+    }
+
+    replaceExpense(index: number, newExpense: ExpenseModel){
+        this.expenses[index] = newExpense
+        this.applyChanges()
+    }
+
+    deleteExpense(index: number){
+        this.expenses.splice(index, 1)
+        this.applyChanges()
     }
 
     autoFetch(){

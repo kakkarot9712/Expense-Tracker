@@ -4,16 +4,16 @@
 <form (ngSubmit)="onSubmitHandler(expenseForm)" #expenseForm='ngForm' *ngIf="formActivated">
     <div class="form-group">
         <label for="expenseName" class="form-label"><strong>Expense Name</strong></label>
-        <input type="text" class="form-input" id="expenseName" name="expenseName" ngModel required>
+        <input type="text" class="form-input" id="expenseName" name="expenseName" [(ngModel)]="expenseName" required>
     </div>
     <div class="form-group">
         <label for="expenseAmount" class="form-label"><strong>Expense Amount</strong></label>
-        <input type="number" class="form-input" id="expenseAmount" name="expenseAmount" ngModel required>
+        <input type="number" class="form-input" id="expenseAmount" name="expenseAmount" [(ngModel)]="expenseAmount" required>
     </div>
     <div class="form-group">
         <label for="expenseAmount" class="form-label"><strong>Expense Amount</strong></label>
-        <input type="date" class="form-input" min="2018-01-01" max="2022-12-31" id="expenseDate" name="expenseDate" ngModel required>
+        <input type="date" class="form-input" min="2018-01-01" max="2022-12-31" id="expenseDate" name="expenseDate" [(ngModel)]="expenseDate" required>
     </div>
-    <button class="addExpense__cta" type="submit" [disabled]="!expenseForm.valid">Add Expense</button>
+    <button class="addExpense__cta" type="submit" [disabled]="!expenseForm.valid">{{editMode?"Save Changes":"Add Expense"}}</button>
     <button class="addExpense__cta addExpense__cancel" (click)="cancelForm()" type="button">Cancel</button>
 </form>

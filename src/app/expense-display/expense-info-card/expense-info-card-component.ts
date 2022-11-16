@@ -1,16 +1,35 @@
-import { Component, Input } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild, Renderer2, AfterViewInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ExpenseModel } from "src/app/shared/expense.model";
+import { MenuDirective } from "src/app/shared/menu.directive";
+import { ExpenseService } from "src/app/shared/expense.service";
+import { animate, style, transition, trigger } from "@angular/animations";
+
 
 @Component({
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, MenuDirective ],
     selector: 'app-info-card',
     templateUrl: './expense-info-card.component.html',
-    styleUrls: ['./expense-info-card.component.css']
+    styleUrls: ['./expense-info-card.component.css'],
 })
 
-export class ExpenseInfoCard {
+export class ExpenseInfoCard implements AfterViewInit {
+    @ViewChild('menu') menuElem: ElementRef
     @Input('expenseData')expense: ExpenseModel
-    constructor(){}
+    @Input('ind')index: number
+
+    constructor(private renderer: Renderer2, private expenseservice: ExpenseService){}
+
+    ngAfterViewInit(): void {
+        this.renderer.setStyle(this.menuElem.nativeElement, 'display', 'none')
+    }
+
+    editEntry(index: number){
+        this.expenseservice.editExpense(index)
+    }
+
+    deleteEntry(index: number){
+        this.expenseservice.deleteExpense(index)
+    }
 }

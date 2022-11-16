@@ -1,4 +1,4 @@
-<div class="info-card">
+<div class="info-card" [menuHost]="menu" #card>
     <div class="info-card__date">
         <p class="info-card__date-year">{{ expense.expenseDate['year'] }}</p>
         <h1 class="info-card__date-day">{{ expense.expenseDate['day'] }}</h1>
@@ -6,4 +6,8 @@
     </div>
     <p class="info-card__name">{{ expense.expenseName }}</p>
     <p class="info-card__amount">&#x20b9; {{ expense.expenseAmount }}</p>
+    <div class="menu" #menu>
+        <button class="btn" (click)="editEntry(index)"> Edit Entry </button>
+        <button class="btn" (click)="deleteEntry(index)"> Delete Entry </button>
+    </div>
 </div>
