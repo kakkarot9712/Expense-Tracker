@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ExpenseDisplayComponent } from './expense-display/expense-display.component';
 import { ExpenseFormComponent } from './expense-form/expense-form.component';
 import { ExpenseGraphComponent } from './expense-graph/expense-graph.component';
 import { HeaderComponent } from './header/header.component';
+import { ExpenseService } from './shared/expense.service';
 
 @Component({
   standalone: true,
@@ -11,6 +12,11 @@ import { HeaderComponent } from './header/header.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'expense-tracker';
+  constructor(private expenseService: ExpenseService){}
+
+  ngOnInit(): void {
+    this.expenseService.autoFetch()
+  }
 }

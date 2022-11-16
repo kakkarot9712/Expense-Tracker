@@ -5,43 +5,8 @@ import { ExpenseModel } from "./expense.model";
 @Injectable({providedIn: "root"})
 
 export class ExpenseService {
-    private DUMMY_EXPENSES = [
-        {
-            expenseName: 'Telivision',
-            expenseAmount: '50000',
-            expenseDate: {
-                day: '08', 
-                month: 'Nov', 
-                year:'2022'
-            }
-        },
-        {
-            expenseName: 'Monthly Light Bill',
-            expenseAmount: '3500',
-            expenseDate: {
-                day: '10', 
-                month: 'Nov', 
-                year:'2021'
-            }
-        },
-        {
-            expenseName: 'Washing Machine',
-            expenseAmount: '20000',
-            expenseDate: {
-                day: '09', 
-                month: 'Jul', 
-                year:'2022'
-            }
-        },
-        {
-            expenseName: 'Monthly Rent',
-            expenseAmount: '15000',
-            expenseDate: {
-                day: '15', 
-                month: 'Dec', 
-                year:'2020'
-            }
-        }]
+    private expenses = []
+    private months_list = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     
     constructor(){}
 
@@ -49,11 +14,22 @@ export class ExpenseService {
     currentYear = new BehaviorSubject<string>('2022')
 
     getFilteredExpenses(year: string){
-        return this.DUMMY_EXPENSES.filter((expense: ExpenseModel)=>expense.expenseDate.year === year)
+        return this.expenses.filter((expense: ExpenseModel)=>expense.expenseDate.year === year)
+    }
+
+    getMonths(){
+        return this.months_list.slice()
     }
 
     addExpense(newExpense: ExpenseModel){
-        this.DUMMY_EXPENSES.push(newExpense)
+        this.expenses.push(newExpense)
         this.expenseChanged.next(true)
+        localStorage.setItem('expenses', JSON.stringify(this.expenses))
+    }
+
+    autoFetch(){
+        if(JSON.parse(localStorage.getItem('expenses'))){
+            this.expenses = JSON.parse(localStorage.getItem('expenses'))
+        }
     }
 }

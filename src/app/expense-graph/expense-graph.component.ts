@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { transition, animate, style, trigger, state } from '@angular/animations';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, KeyValue } from '@angular/common';
+import { transition, animate, style, trigger } from '@angular/animations';
 
 import { GraphFiller } from './graph-filler.directive';
 import { ExpenseService } from '../shared/expense.service';
-import { ExpenseModel } from '../shared/expense.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,58 +18,62 @@ import { Subscription } from 'rxjs';
         height:0
       }),
       animate(500)
-    ])
+    ]),
   ])]
 })
 
-export class ExpenseGraphComponent implements OnInit {
-  maxAmount: number
+export class ExpenseGraphComponent implements OnInit, OnDestroy {
+  maxAmount = 0
   expenseObs: Subscription
   yearObs: Subscription
   activeYear: string
-  MONTH_ARRAY = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-  MONTH_RATIOS = {}
+  MONTH_AMOUNTS = {}
 
-  constructor(private expenseservice: ExpenseService) { 
+  onCompare(_right: KeyValue<any, any>,_left: KeyValue<any, any>): number {
+    return 1;
+  }
 
+  constructor(private expenseservice: ExpenseService) {}
+
+  ngOnInit(): void {
     this.yearObs = this.expenseservice.currentYear.subscribe(year=>{
       this.activeYear = year
       this.updateMonthRatios()
+      this.setMaxHeight()
     })
 
     this.expenseObs = this.expenseservice.expenseChanged.subscribe(()=>{
       this.updateMonthRatios()  
+      this.setMaxHeight()
     })
   }
 
   updateMonthRatios(){
     this.setHeightPercentToZero()
-    this.maxAmount = this.getMaxHeight()
     this.expenseservice.getFilteredExpenses(this.activeYear).forEach(expense=>{
-        this.MONTH_RATIOS[expense.expenseDate.month] = `${this.calculatePercent(+expense.expenseAmount).toString()}%`
+        this.MONTH_AMOUNTS[expense.expenseDate.month] += +expense.expenseAmount
       })
-  }
+    }
 
   calculatePercent(amt: number){
-    return amt/this.maxAmount * 100;
+    return `${amt/this.maxAmount * 100}%`;
   }
   
-  getMaxHeight(){
-    if(this.expenseservice.getFilteredExpenses(this.activeYear).length){
-      let expenseAmt = this.expenseservice.getFilteredExpenses(this.activeYear).reduce((prevExpense: ExpenseModel, expense: ExpenseModel)=>{
-        if(+prevExpense.expenseAmount > +expense.expenseAmount){
-          return prevExpense
-        }
-        return expense
-      })
-      return +expenseAmt.expenseAmount
-    }
-    return null
+  setMaxHeight(){
+    this.maxAmount = 0
+    this.expenseservice.getMonths().forEach(month=>{
+      if(this.MONTH_AMOUNTS[month] > this.maxAmount){
+        this.maxAmount = this.MONTH_AMOUNTS[month]
+      }
+    })
   }
 
   setHeightPercentToZero(){
-    this.MONTH_ARRAY.forEach(month=>{this.MONTH_RATIOS[month]='0%'})
+    this.expenseservice.getMonths().forEach(month=>{this.MONTH_AMOUNTS[month]=0})
   }
 
-  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.yearObs.unsubscribe()
+    this.expenseObs.unsubscribe()
+  }
 }

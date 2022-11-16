@@ -1,7 +1,7 @@
 <div class="graph-container">
-    <div class="bar-container" *ngFor="let month of MONTH_RATIOS | keyvalue">
+    <div class="bar-container" *ngFor="let month of MONTH_AMOUNTS | keyvalue:onCompare ">
         <div class="unfilled-bar">
-            <div class="filled-bar" [fillGraph]="month.value" @heightAnim></div>
+            <div class="filled-bar" [fillGraph]="calculatePercent(month.value)" @heightAnim></div>
         </div>
         <p> {{ month.key }} </p>
     </div>
