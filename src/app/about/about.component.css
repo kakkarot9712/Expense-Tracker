@@ -1,0 +1,17 @@
+.card {
+    color: white;
+    background-color: rgb(110, 2, 149);
+    width: 60%;
+    margin: 1rem auto;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+h3, h4{
+    font-weight: 500;
+    display: inline-block;
+}
+
+ul {
+    list-style-position: inside;
+}

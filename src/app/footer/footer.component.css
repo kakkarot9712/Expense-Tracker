@@ -1,0 +1,23 @@
+footer {
+    background-color: rgb(110, 2, 149);
+    display: flex;
+    color: white;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 4rem;
+}
+
+footer p a {
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.source:hover{
+    background-color: rgb(47, 2, 64);
+}
