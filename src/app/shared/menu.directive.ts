@@ -9,12 +9,12 @@ export class MenuDirective{
     @Input('menuHost')menuElement: HTMLElement
     @HostListener('document:click', ['$event.target']) menuAction(target: HTMLElement){
         if(target===this.element.nativeElement){
-            if(this.menuElement.style.display === 'none'){
-                this.renderer.setStyle(this.menuElement, 'display', 'inline-block')
+            if(this.menuElement.style.transform === 'scale(0)'){
+                this.renderer.setStyle(this.menuElement, 'transform', 'scale(1)')
                 return
             }
         }
-        this.renderer.setStyle(this.menuElement, 'display', 'none')
+        this.renderer.setStyle(this.menuElement, 'transform', 'scale(0)')
     }
     constructor(private element: ElementRef, private renderer: Renderer2){}
 }

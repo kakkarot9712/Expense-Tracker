@@ -3,8 +3,6 @@ import { CommonModule } from "@angular/common";
 import { ExpenseModel } from "src/app/shared/expense.model";
 import { MenuDirective } from "src/app/shared/menu.directive";
 import { ExpenseService } from "src/app/shared/expense.service";
-import { animate, style, transition, trigger } from "@angular/animations";
-
 
 @Component({
     standalone: true,
@@ -18,11 +16,10 @@ export class ExpenseInfoCard implements AfterViewInit {
     @ViewChild('menu') menuElem: ElementRef
     @Input('expenseData')expense: ExpenseModel
     @Input('ind')index: number
-
     constructor(private renderer: Renderer2, private expenseservice: ExpenseService){}
 
     ngAfterViewInit(): void {
-        this.renderer.setStyle(this.menuElem.nativeElement, 'display', 'none')
+        this.renderer.setStyle(this.menuElem.nativeElement, 'transform', 'scale(0)')
     }
 
     editEntry(index: number){

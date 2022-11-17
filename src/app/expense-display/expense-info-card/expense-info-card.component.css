@@ -62,7 +62,7 @@
 
 .menu {
     background-color: white;
-    display: none;
+    display: inline-block;
     width: 8rem;
     border-radius: 0.5rem;
     position: absolute;
@@ -70,6 +70,8 @@
     bottom: 2rem;
     left: 14rem;
     overflow: hidden;
+    transition: transform ease-in 67ms;
+    transform: scale(0);
     box-shadow: 2px 2px 2px 2px rgba(32, 1, 34, 0.8);
 }
 
