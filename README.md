@@ -1,27 +1,60 @@
-# ExpenseTracker
+# Expense Tracker
 
+This Website will help user to track and compare expenses.
+<br>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This website will allow users to add/edit/delete expenses. This will store data on local storage thus it will retrieve all data added by user before. 
+This website also comes with rough monthly basis graphical visualisation for whole year. allowing user to roughly compare expenses for every month.
 
-## Code scaffolding
+Note: As of now, this website is desktop only.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+* User can add/edit/delete expense entry.
+* All the entries will be stored in local storage, so all the data will be retrieved after refresh
+* This website will fetch expense amount and then it will be represented as a graph. Remember that graphical represntation is not exact and that graph will take highest expense amount of any month as the basis for all other monthly expenses.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Demo
 
-## Running unit tests
+Here is the [Demo of website](https://id11297.web.app/home) 
+<br>
+Deployed using [Firebase](https://firebase.google.com/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Built With
 
-## Running end-to-end tests
+* <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" />
+* <img src="https://img.shields.io/badge/HTML5%20-%23e34f26.svg?&style=for-the-badge&logo=html5&logoColor=white" />
+* <img src="https://img.shields.io/badge/CSS3-1572B6?&style=for-the-badge&logo=css3&logoColor=white" />
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Screenshots
+<details>
+  <summary>Click to see screenshots</summary>
+  <br>
+  <img src='/src/assets/1.png'></img>
+  <img src='/src/assets/2.png'></img>
+  <img src='/src/assets/3.png'></img>
+</details>
 
-## Further help
+## Getting Started
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Prerequisites
+
+1) [Angular CLI v14.2.1 and UP](https://angular.io/)
+2) [Node.js v16.17.0 and UP](https://nodejs.org/en/) (LTS Version Recommanded) 
+
+### Installing
+
+If anyone wants to test this project, user can do so by following below instruction.
+
+* Download source code and extract anywhere into the PC.
+* Open Terminal where project is extracted and then run following command 
+```
+npm install 
+```
+* After npm installs all dependency, user can run below command to see project in action.
+```
+ng serve
+```
