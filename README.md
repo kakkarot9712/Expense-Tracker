@@ -3,6 +3,9 @@
 This Website will help user to track and compare expenses.
 <br>
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+<br>
+<br>
+This Project uses Angular's Standalone component implimentation, So this project will fail to build with older versions of Angular.
 
 ## Description
 
