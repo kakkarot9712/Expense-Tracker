@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ExpenseFormComponent } from '../expense-form/expense-form.component';
 import { ExpenseGraphComponent } from '../expense-graph/expense-graph.component';
 import { ExpenseDisplayComponent } from '../expense-display/expense-display.component';
+import { BackdropComponent } from '../backdrop/backdrop.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ExpenseFormComponent, ExpenseGraphComponent, ExpenseDisplayComponent],
+  imports: [CommonModule, ExpenseFormComponent, ExpenseGraphComponent, ExpenseDisplayComponent, BackdropComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

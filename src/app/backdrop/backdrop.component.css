@@ -1,0 +1,48 @@
+.backdrop {
+    display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgb(110, 2, 149);
+    z-index: 50;
+    color: white;
+    padding: 1rem;
+}
+
+.btn {
+    background-color: hsl(300, 89%, 35%);
+    margin: 0 0.3rem;
+    color: white;
+    border: none;
+    border: 2px solid #5b085b;
+    padding: 0.5rem;
+    font-size: inherit;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn:hover, 
+.btn:active {
+    background-color: hsl(300, 65%, 41%);
+}
+
+@media screen and (max-width: 650px) {
+    .backdrop {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
