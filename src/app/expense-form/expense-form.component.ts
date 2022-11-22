@@ -43,7 +43,11 @@ export class ExpenseFormComponent implements OnInit {
 
   onSubmitHandler(form: NgForm){
     let currentdate = new Date(form.value.expenseDate)
-      let newExpense: ExpenseModel = {
+    if(currentdate.getFullYear() < 2018 || currentdate.getFullYear() > 2022){
+      alert('Date inputs for year less than 2018 and greater than 2022 is not supported! please change the date')
+      return
+    }  
+    let newExpense: ExpenseModel = {
         expenseName: form.value.expenseName,
         expenseAmount: form.value.expenseAmount,
         expenseDate: {
